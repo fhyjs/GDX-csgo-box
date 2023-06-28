@@ -2,11 +2,13 @@ package org.eu.hanana.cirno.csgo;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import org.eu.hanana.cirno.csgo.api.GuiBase;
+import org.eu.hanana.cirno.csgo.api.Inputer;
 import org.eu.hanana.cirno.csgo.enums.KeyAct;
 import org.eu.hanana.cirno.csgo.gui.BarScreen;
 import org.eu.hanana.cirno.csgo.loader.PluginLoader;
@@ -14,13 +16,14 @@ import org.eu.hanana.cirno.csgo.loader.PluginProp;
 import org.eu.hanana.cirno.csgo.res.TexManager;
 import org.eu.hanana.cirno.csgo.screen.Sutil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.badlogic.gdx.Gdx.gl;
 
 public class Gobox extends ApplicationAdapter {
-	public Map<Integer, Boolean> keyMap = new HashMap<>();
 	private static Gobox Instance;
 	public Gobox(){
 		Instance=this;
@@ -32,7 +35,7 @@ public class Gobox extends ApplicationAdapter {
 	}
 	ShapeRenderer shapeRenderer;
 	SpriteBatch batch;
-	private final Map<String,GuiBase> CurrentScreens=new HashMap<>();
+	public final Map<String,GuiBase> CurrentScreens=new HashMap<>();
 	public void addScreen(String id,GuiBase screen){
 		CurrentScreens.put(id,screen);
 		screen.init();
@@ -46,19 +49,18 @@ public class Gobox extends ApplicationAdapter {
 	}
 	@Override
 	public void create () {
+		Props.BaseH=Gdx.graphics.getHeight();
+		Props.BaseW=Gdx.graphics.getWidth();
 		shapeRenderer=new ShapeRenderer();
 		Gdx.input.setInputProcessor(new CInputProcessor());
 		batch=new SpriteBatch();
 		new PluginLoader();
 	}
-	public void ProcessInput(int code, KeyAct act){
-
-	}
 	@Override
 	public void resize(int width, int height) {
+		Props.resize();
 		for (GuiBase s : CurrentScreens.values()) {
 			s.size();
-
 		}
 	}
 	@Override

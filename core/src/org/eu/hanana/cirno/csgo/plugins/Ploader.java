@@ -5,6 +5,7 @@ import org.eu.hanana.cirno.csgo.Gobox;
 import org.eu.hanana.cirno.csgo.api.BtnCallback;
 import org.eu.hanana.cirno.csgo.api.Plugin;
 import org.eu.hanana.cirno.csgo.gui.BarScreen;
+import org.eu.hanana.cirno.csgo.gui.ConnectionScreen;
 import org.eu.hanana.cirno.csgo.gui.LoadingScreen;
 import org.eu.hanana.cirno.csgo.res.I18n;
 import org.eu.hanana.cirno.csgo.screen.Sutil;
@@ -30,14 +31,19 @@ public class Ploader {
                 I18n.init();
                 LS="adding menu items";
                 BarScreen.getInstance().addbtn(I18n.get("menu.conn"), () -> {
-                    System.out.print(21);
+                    for (String s : Gobox.getInstance().CurrentScreens.keySet()) {
+                        if (s.contains("page-")){
+                            Gobox.getInstance().rmScreen(s);
+                        }
+                    }
+                    Gobox.getInstance().addScreen("page-conn",new ConnectionScreen());
                 },0.1f);
                 BarScreen.getInstance().addbtn("11", () -> {
                     System.out.print(21);
                 },0.1f);
-
                 LS="Finishing";
                 Gobox.getInstance().rmScreen("loading");
+                Gobox.getInstance().addScreen("page-conn",new ConnectionScreen());
             } catch (Throwable e) {
                 throw new RuntimeException(e);
             }

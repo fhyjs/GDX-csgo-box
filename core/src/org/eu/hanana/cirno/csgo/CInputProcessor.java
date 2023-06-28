@@ -3,45 +3,78 @@ package org.eu.hanana.cirno.csgo;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import org.eu.hanana.cirno.csgo.api.Inputer;
 import org.eu.hanana.cirno.csgo.enums.KeyAct;
 
-public class CInputProcessor implements InputProcessor {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-    ApplicationListener applicationListener = Gdx.app.getApplicationListener();
+public class CInputProcessor implements InputProcessor {
+    public static Map<Integer, Boolean> keyMap = new HashMap<>();
+    public static final List<Inputer> inputProcessors = new ArrayList<>();
+
     public boolean keyDown (int keycode) {
-        ((Gobox)applicationListener).keyMap.put(keycode,true);
-        ((Gobox)applicationListener).ProcessInput(keycode, KeyAct.Down);
+        keyMap.put(keycode,true);
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.KeyEvent(keycode,KeyAct.Down);
+        }
         return true;
     }
 
     public boolean keyUp (int keycode) {
-        ((Gobox)applicationListener).keyMap.put(keycode,false);
-        ((Gobox)applicationListener).ProcessInput(keycode,KeyAct.UP);
+        keyMap.put(keycode,false);
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.KeyEvent(keycode,KeyAct.UP);
+        }
         return true;
     }
 
     public boolean keyTyped (char character) {
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.keyTyped(character);
+        }
         return true;
     }
 
     public boolean touchDown (int x, int y, int pointer, int button) {
-        return false;
+        Props.MouseDown=true;
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.touchDown(x, y, pointer, button);
+        }
+        return true;
     }
 
     public boolean touchUp (int x, int y, int pointer, int button) {
-        return false;
+        Props.MouseDown=false;
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.touchUp(x, y, pointer, button);
+        }
+        return true;
     }
 
     public boolean touchDragged (int x, int y, int pointer) {
-        return false;
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.touchDragged(x, y, pointer);
+        }
+        return true;
     }
 
     public boolean mouseMoved (int x, int y) {
+        Props.MouseX=x;
+        Props.MouseY=y;
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.mouseMoved(x, y);
+        }
         return true;
     }
 
     public boolean scrolled (float amountX, float amountY) {
-        return false;
+        for (Inputer inputProcessor : inputProcessors) {
+            inputProcessor.scrolled(amountX, amountY);
+        }
+        return true;
     }
 }
 

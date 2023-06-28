@@ -18,6 +18,7 @@ public abstract class GuiBase {
         buttonList.clear();
         size();
     }
+    public void action(int id){}
     public abstract void size();
     public abstract void drawBackground(SpriteBatch batch, ShapeRenderer shapeRenderer);
     public void drawForeground(SpriteBatch batch, ShapeRenderer shapeRenderer){
