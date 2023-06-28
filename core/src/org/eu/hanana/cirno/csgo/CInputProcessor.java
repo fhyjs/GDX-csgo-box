@@ -48,7 +48,8 @@ public class CInputProcessor implements InputProcessor {
 
     public boolean touchUp (int x, int y, int pointer, int button) {
         Props.MouseDown=false;
-        for (Inputer inputProcessor : inputProcessors) {
+        List<Inputer> Tmp=new ArrayList<>(inputProcessors);
+        for (Inputer inputProcessor : Tmp) {
             inputProcessor.touchUp(x, y, pointer, button);
         }
         return true;

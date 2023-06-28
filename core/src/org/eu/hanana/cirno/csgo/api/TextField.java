@@ -1,31 +1,23 @@
 package org.eu.hanana.cirno.csgo.api;
 
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.eu.hanana.cirno.csgo.CInputProcessor;
 import org.eu.hanana.cirno.csgo.Props;
+import org.eu.hanana.cirno.csgo.api.Widght;
 import org.eu.hanana.cirno.csgo.res.ResLoc;
 import org.eu.hanana.cirno.csgo.res.TexManager;
 import org.eu.hanana.cirno.csgo.screen.Sutil;
 
-import javax.security.auth.callback.Callback;
-
-import static com.badlogic.gdx.Gdx.gl;
-
-public class ButtonBase implements Inputer,Widght{
-    public final GuiBase callback;
+public class TextField implements Widght,Inputer {
     public ResLoc tex=new ResLoc("cirno:button.png");
     public boolean enable;
     public int id,x,y,height,width;
     public String text;
-    public ButtonBase(int id, int x, int y, int width, int height, String text, GuiBase callback){
+    public TextField(int id, int x, int y, int width, int height, String text){
         this.x=x;
         this.y=y;
         this.height=height;
@@ -33,7 +25,6 @@ public class ButtonBase implements Inputer,Widght{
         this.id=id;
         this.text=text;
         this.enable=true;
-        this.callback=callback;
         CInputProcessor.inputProcessors.add(this);
     }
 
@@ -41,7 +32,7 @@ public class ButtonBase implements Inputer,Widght{
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (enable) {
             if (Props.getMouseX() > x * Props.scaleW && Props.getMouseX() < x * Props.scaleW + width * Props.scaleW && Props.getMouseY() > y * Props.scaleH && Props.getMouseY() < y * Props.scaleH + height * Props.scaleH)
-                callback.action(id);
+
         }
         return true;
     }
@@ -63,7 +54,6 @@ public class ButtonBase implements Inputer,Widght{
         Sutil.drawText((Batch) batch,text, (int) (x+width*0.1f),y+height-10,1,Color.WHITE);
         batch.end();
     }
-
     @Override
     public void dispose() {
         CInputProcessor.inputProcessors.remove(this);

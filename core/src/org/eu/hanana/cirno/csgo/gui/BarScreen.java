@@ -33,7 +33,7 @@ public class BarScreen extends GuiBase {
         //buttonList.add(new ButtonBase(0,x+Props.getXSize(0.03f),y+Props.getYSize(0.03f),Props.getXSize(0.1f),Props.getYSize(0.08f),"X"));
     }
     public void addbtn(String text, BtnCallback callback,float width){
-        buttonList.add(new ButtonBase(buttonList.size(),x+Props.getXSize(0.03f)+Props.getXSize(0.11f)*buttonList.size(),y+Props.getYSize(0.03f),Props.getXSize(width),Props.getYSize(0.08f),text,this));
+        buttonList.add(new ButtonBase(buttonList.size(),x+Props.getXSize(0.03f)+Props.getXSize(0.11f)*buttonList.size(),y+Props.getYSize(0.01f),Props.getXSize(width),Props.getYSize(0.08f),text,this));
         callbacks.put(buttonList.size()-1,callback);
     }
 

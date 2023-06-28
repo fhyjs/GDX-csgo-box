@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class GuiBase {
     public int x,y,dx,dy;
-    public List<ButtonBase> buttonList = new ArrayList<>();
+    public List<Widght> buttonList = new ArrayList<>();
     public void drawAll(SpriteBatch batch, ShapeRenderer shapeRenderer){
         drawBackground(batch,shapeRenderer);
         drawForeground(batch,shapeRenderer);
@@ -22,12 +22,16 @@ public abstract class GuiBase {
     public abstract void size();
     public abstract void drawBackground(SpriteBatch batch, ShapeRenderer shapeRenderer);
     public void drawForeground(SpriteBatch batch, ShapeRenderer shapeRenderer){
-        for (ButtonBase buttonBase : buttonList) {
+        for (Widght buttonBase : buttonList) {
             buttonBase.draw(batch,shapeRenderer);
         }
     }
     public void drawTooltip(SpriteBatch batch, ShapeRenderer shapeRenderer){
 
     }
-    public abstract void dispose();
+    public void dispose(){
+        for (Widght buttonBase : buttonList) {
+            buttonBase.dispose();
+        }
+    }
 }

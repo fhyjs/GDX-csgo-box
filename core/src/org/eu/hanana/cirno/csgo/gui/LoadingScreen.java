@@ -33,12 +33,12 @@ public class LoadingScreen extends GuiBase {
     @Override
     public void drawForeground(SpriteBatch batch, ShapeRenderer shapeRenderer) {
         batch.begin();
-        Sutil.drawText(batch,"LOADING...\nStage: "+ Ploader.LS,(int)(dx*.1),(int)(dy*.2),1);
+        Sutil.drawText(batch,"LOADING...\nStage: "+ Ploader.LS,(int)(dx*.1),(int)(dy*.2),1,Color.WHITE);
         batch.end();
     }
 
     @Override
     public void dispose() {
-
+        super.dispose();
     }
 }

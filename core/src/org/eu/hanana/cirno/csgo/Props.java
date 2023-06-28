@@ -1,11 +1,16 @@
 package org.eu.hanana.cirno.csgo;
 
+import cn.fhyjs.cirno.Telnet;
 import com.badlogic.gdx.Gdx;
 
 public class Props {
     public static int MouseX,MouseY,BaseW,BaseH,CW,CH;
     public static float scaleW,scaleH;
     public static boolean MouseDown;
+    public static Telnet telnet;
+    public static boolean IsConnect(){
+        return telnet!=null&&telnet.telnetClient.isConnected();
+    }
 
     public static int getXSize(float h){
         return (int) (Gdx.graphics.getWidth()*h);
@@ -20,10 +25,10 @@ public class Props {
         scaleW= (float) CW /BaseW;
     }
     public static int getMouseX(){
-        return MouseX;
+        return (int) (MouseX/scaleW);
     }
 
     public static int getMouseY() {
-        return Gdx.graphics.getHeight()-MouseY;
+        return (int) ((Gdx.graphics.getHeight()-MouseY)/scaleH);
     }
 }
