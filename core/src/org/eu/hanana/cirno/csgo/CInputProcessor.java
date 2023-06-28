@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import org.eu.hanana.cirno.csgo.enums.KeyAct;
 
 public class CInputProcessor implements InputProcessor {
+
     ApplicationListener applicationListener = Gdx.app.getApplicationListener();
     public boolean keyDown (int keycode) {
         ((Gobox)applicationListener).keyMap.put(keycode,true);

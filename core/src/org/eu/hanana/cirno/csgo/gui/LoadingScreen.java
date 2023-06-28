@@ -7,6 +7,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import org.eu.hanana.cirno.csgo.Gobox;
 import org.eu.hanana.cirno.csgo.Props;
 import org.eu.hanana.cirno.csgo.api.GuiBase;
+import org.eu.hanana.cirno.csgo.plugins.Ploader;
+import org.eu.hanana.cirno.csgo.screen.Sutil;
 
 public class LoadingScreen extends GuiBase {
     @Override
@@ -30,7 +32,9 @@ public class LoadingScreen extends GuiBase {
 
     @Override
     public void drawForeground(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-        
+        batch.begin();
+        Sutil.drawText(batch,"LOADING...\nStage: "+ Ploader.LS,(int)(dx*.1),(int)(dy*.2),1);
+        batch.end();
     }
 
     @Override

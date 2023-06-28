@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import org.eu.hanana.cirno.csgo.Gobox;
 
+import static com.badlogic.gdx.Gdx.gl;
+import static com.badlogic.gdx.graphics.GL20.*;
+
 public class Sutil {
     private static Sutil Instance;
     public Sutil(){
@@ -20,6 +23,8 @@ public class Sutil {
     public void drawText0(Batch batch,String str,int x,int y,float size){
         if (font==null)
             font=new BitmapFont(Gdx.files.internal("cirno/msyh/msyh.fnt"));
+        gl.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        font.getData().setScale(size,size);
         font.draw(batch,str,x,y);
     }
     public static void drawText(Batch batch, String str, int x, int y, float size){

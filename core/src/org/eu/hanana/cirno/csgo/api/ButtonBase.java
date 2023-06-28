@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import org.eu.hanana.cirno.csgo.res.ResLoc;
 import org.eu.hanana.cirno.csgo.res.TexManager;
+import org.eu.hanana.cirno.csgo.screen.Sutil;
 
 import static com.badlogic.gdx.Gdx.gl;
 
@@ -29,6 +30,7 @@ public class ButtonBase {
         sprite.setScale((float) width /sprite.getTexture().getWidth(), (float) height /sprite.getTexture().getHeight()); // Scale the sprite
         sprite.setPosition(x,y);
         sprite.draw(batch);
+        Sutil.drawText(batch,text,x,y+height/2,1);
         batch.end();
     }
 }
