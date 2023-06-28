@@ -9,4 +9,7 @@ public class Props {
     public static int getYSize(float h){
         return (int) (Gdx.graphics.getHeight()*h);
     }
+    public static int getMouseX(){
+        return 1;//Gdx.input.m
+    }
 }
